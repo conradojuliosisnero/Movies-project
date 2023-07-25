@@ -1,6 +1,4 @@
-# Como Conectarse a una API con Javascript usando Async, Await y Fetch
-### [Tutorial: https://youtu.be/PNr8-JDMinU](https://youtu.be/PNr8-JDMinU)
+# API-Movies
+APIS-Practice is a repository 📖where I am practicing 💻connection to apis 👨‍🏫publishes and where I apply my knowledge in asynchronous ⚙️projects
+practicing connection to APIS I connected to this "free" movie api which gives you updates on the most popular movies in the last 24 hours
 
-![Como Conectarse a una API con Javascript usando Async, Await y Fetch](https://raw.githubusercontent.com/falconmasters/como-conectarse-a-una-api-javascript/master/img/thumb.png)
-
-Por: [FalconMasters](http://www.falconmasters.com)
