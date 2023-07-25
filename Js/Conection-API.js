@@ -27,6 +27,10 @@ const optionsObserver = {
 
 const observer = new IntersectionObserver((entrada, observador) => {}, optionsObserver);
 
+const moviesViewport = document.querySelectorAll('.contenedor .pelicula');
+
+console.log(moviesViewport);
+
 const loadMovies = async () => {
 	try {
 		const response = await fetch(urlApi); //hacemos la peticion
