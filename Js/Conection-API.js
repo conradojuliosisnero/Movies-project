@@ -18,6 +18,7 @@ btnIzquierdo.addEventListener('click',() => {
     }
 });
 
+    // import { buttons } from "./menu.dinamic.down.js";
 // comenzamos creando una funcion para conectarnos a la api
 const cargarPeliculas = async () => {
 	try {
@@ -52,3 +53,7 @@ const cargarPeliculas = async () => {
 };
 
 cargarPeliculas();
+
+// export const conectionApi = {
+//     cargarPeliculas,
+// }
