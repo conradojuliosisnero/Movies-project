@@ -77,13 +77,4 @@ const loadMovies = async () => {
 	}
 };
 
-<<<<<<< HEAD
-cargarPeliculas();
-
-// export const conectionApi = {
-//     cargarPeliculas,
-// }
-=======
 loadMovies();
-
->>>>>>> ce2272e151a2ea87d41781c75a1d78075210d4c4
