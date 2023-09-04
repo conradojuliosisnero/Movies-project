@@ -8,18 +8,19 @@ body {
 	font-family: "Montserrat", sans-serif;
 	background: #e0e0e0;
 	color: #1d1d1d;
-	&.modo-oscuro{
+	transition: background-color 300ms ease;
+	&.modo-oscuro {
 		background-color: #000000;
 		nav {
 			.nav__list {
-				background-color:rgb(0,0,0,.1);
+				background-color: rgb(0, 0, 0, 0.1);
 				backdrop-filter: blur(10px);
 			}
 		}
-		.titulo{
+		.titulo {
 			color: #ffffff;
 		}
-		.name__beta{
+		.name__beta {
 			color: #ffffff;
 		}
 	}
@@ -33,19 +34,19 @@ header {
 		height: 90px;
 		position: relative;
 		display: flex;
-		.img__nav{
+		.img__nav {
 			display: flex;
 			width: 40px;
 			height: 40px;
 			position: absolute;
 			left: 20px;
 			top: 50%;
-			transform: translate(-0%,-50%);
-			span{
+			transform: translate(-0%, -50%);
+			span {
 				padding: 0px 10px;
 				color: #ffffff;
 			}
-			img{
+			img {
 				width: 100%;
 				height: 100%;
 			}
@@ -58,8 +59,8 @@ header {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: #1c1c1c;
-			#Home{
+			background-color: #000000;
+			#Home {
 				font-size: 1.6em;
 			}
 			.list__li {
@@ -141,21 +142,20 @@ header {
 /* Personalizar el scrollbar en navegadores WebKit */
 ::-webkit-scrollbar {
 	width: 0px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
 	background-color: #888;
-  }
-  
-  /* Personalizar el scrollbar en navegadores Gecko */
-  ::-webkit-scrollbar {
+}
+
+/* Personalizar el scrollbar en navegadores Gecko */
+::-webkit-scrollbar {
 	width: 9px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background-color: #000000;
-  }
-  
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #212121;
+}
 
 footer {
 	position: fixed;
@@ -167,7 +167,7 @@ footer {
 	height: 50px;
 	background: transparent;
 }
-.name__beta{
+.name__beta {
 	position: absolute;
 	right: 50px;
 	color: #474747;
@@ -181,7 +181,7 @@ footer .leyenda {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color:rgb(0,0,0,.1);
+	background-color: rgb(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 }
 
@@ -190,11 +190,8 @@ footer .leyenda p a {
 	color: #ffffff;
 	font-size: 0.7em;
 	padding: 20px 25px;
-	border-radius: .7em;
-
+	border-radius: 0.7em;
 }
-
-
 
 @media screen and (max-width: 769px) {
 	.contenedor {

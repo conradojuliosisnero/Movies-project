@@ -8,6 +8,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background: #e0e0e0;
   color: #1d1d1d;
+  transition: background-color 300ms ease;
 }
 body.modo-oscuro {
   background-color: #000000;
@@ -58,7 +59,7 @@ header nav .nav__list {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1c1c1c;
+  background-color: #000000;
 }
 header nav .nav__list #Home {
   font-size: 1.6em;
@@ -151,7 +152,7 @@ header nav .nav__list .list__li a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000000;
+  background-color: #212121;
 }
 
 footer {
