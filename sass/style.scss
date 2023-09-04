@@ -43,7 +43,7 @@ header {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: #461e96;
+			background-color: #000000;
 			#Home{
 				font-size: 1.6em;
 			}
@@ -64,7 +64,7 @@ header {
 	width: 100%;
 	max-width: 1000px;
 	margin: 0px auto 100px auto;
-	padding: 40px 0px 0px 0px;
+	padding: 130px 0px 0px 0px;
 	background-color: transparent;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -122,6 +122,25 @@ header {
 .paginacion button:hover {
 	background: #137c32;
 }
+
+/* Personalizar el scrollbar en navegadores WebKit */
+::-webkit-scrollbar {
+	width: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background-color: #888;
+  }
+  
+  /* Personalizar el scrollbar en navegadores Gecko */
+  ::-webkit-scrollbar {
+	width: 9px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background-color: #000000;
+  }
+  
 
 footer {
 	position: fixed;
