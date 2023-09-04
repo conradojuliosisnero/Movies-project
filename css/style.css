@@ -10,6 +10,56 @@ body {
   color: #1d1d1d;
 }
 
+header {
+  width: 100%;
+  position: fixed;
+}
+header nav {
+  width: 100%;
+  height: 90px;
+  position: relative;
+  display: flex;
+}
+header nav .img__nav {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+header nav .img__nav span {
+  padding: 0px 10px;
+  color: #ffffff;
+}
+header nav .img__nav img {
+  width: 100%;
+  height: 100%;
+}
+header nav .nav__list {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #461e96;
+}
+header nav .nav__list #Home {
+  font-size: 1.6em;
+}
+header nav .nav__list .list__li {
+  font-size: 1.2em;
+  padding: 15px 20px;
+  position: relative;
+}
+header nav .nav__list .list__li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
 .contenedor {
   width: 100%;
   max-width: 1000px;
@@ -81,7 +131,14 @@ footer {
   justify-content: center;
   width: 100%;
   height: 50px;
-  background: #461e96;
+  background: transparent;
+}
+
+.name__beta {
+  position: absolute;
+  right: 50px;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 footer .leyenda {
@@ -91,13 +148,16 @@ footer .leyenda {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 footer .leyenda p a {
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
   font-size: 0.7em;
+  padding: 20px 25px;
+  border-radius: 0.7em;
 }
 
 @media screen and (max-width: 769px) {

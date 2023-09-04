@@ -8,14 +8,32 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://kit.fontawesome.com/43cf05dd1c.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="img/movies.png">
 	<title>Recent Movies</title>
 </head>
 <body>
+	<header>
+		<nav>
+			<ul class="nav__list">
+				<div class="img__nav">
+				<img src="img/movies.png">
+				<span>App Movies</span>
+				</div>
+				<li class="list__li" id="Home"><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+				<li class="list__li"><a href="#">Movies</a></li>
+				<li class="list__li"><a href="#">Series</a></li>
+				<li class="list__li"><a href="#">Kids</a></li>
+				<li class="list__li"><a href="#">Help</a></li>
+			</ul>
+		</nav>
+	</header>
 	<!-- contenedor  -->
-	<div class="contenedor" id="contenedor"></div>
+	<div class="contenedor" id="contenedor">
+	</div>
 	<footer>
 		<div class="leyenda"><p><a href="https://github.com/conradojuliosisnero">Desing by @julioConrado</a></p></div>
+		<span class="name__beta">BETA</span>
 	</footer>
 	<!-- script  -->
 	<script type="module" src="Js/Conection-API.js"></script>
