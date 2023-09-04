@@ -9,6 +9,19 @@ body {
   background: #e0e0e0;
   color: #1d1d1d;
 }
+body.modo-oscuro {
+  background-color: #000000;
+}
+body.modo-oscuro nav .nav__list {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+body.modo-oscuro .titulo {
+  color: #ffffff;
+}
+body.modo-oscuro .name__beta {
+  color: #ffffff;
+}
 
 header {
   width: 100%;
@@ -45,7 +58,7 @@ header nav .nav__list {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
+  background-color: #1c1c1c;
 }
 header nav .nav__list #Home {
   font-size: 1.6em;
@@ -155,7 +168,7 @@ footer {
 .name__beta {
   position: absolute;
   right: 50px;
-  color: #ffffff;
+  color: #474747;
   font-weight: 600;
 }
 
