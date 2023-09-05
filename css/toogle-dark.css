@@ -1,8 +1,8 @@
 .switch {
   font-size: 17px;
-  position: absolute;
   right: 50px;
-  transform: translate(-50%);
+  top: 50%;
+  transform: translate(0%, -50%);
   display: inline-block;
   width: 64px;
   height: 34px;

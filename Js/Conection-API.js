@@ -10,8 +10,6 @@ const optionsObserver = {
 
 const observador = new IntersectionObserver((entradas,observador) => {
 
-	console.log(entradas)
-
 	entradas.forEach(entrada =>{
 		if (entrada.isIntersecting) {
 			pagina++;
