@@ -25,7 +25,7 @@ body {
 	width: 100%;
 	max-width: 1000px;
 	margin: 0px auto 100px auto;
-	padding: 130px 0px 0px 0px;
+	padding: 150px 0px 0px 0px;
 	background-color: transparent;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -50,6 +50,7 @@ body {
 	min-height: 200px;
 	margin-bottom: 10px;
 	border-radius: 15px;
+	border-radius: .7em;
 }
 
 .paginacion {
@@ -140,9 +141,12 @@ footer .leyenda p a {
 
 @media screen and (max-width: 769px) {
 	header {
+		position: fixed;
 		nav {
 			position: relative;
-
+			padding:35px 0px;
+			display: flex;
+			justify-content: flex-end;
 			.menu__responsive {
 				display: flex;
 				position: absolute;
@@ -158,16 +162,23 @@ footer .leyenda p a {
 
 			.nav__list {
 				display: none;
+				transition: display 200ms ease;
 				background-color: #000000;
+				width: 100%;
+				padding: 0;
+				padding:35px 0px;
+				.switch {
+					top: 50px;
+					left: 50px;
+				}
 				#Home {
 					font-size: 1.6em;
 				}
 				&.active{
 					display: flex;
 					padding: 150px 0px;
-					position: relative;
-					left:0;			
-					align-items: flex-start;		
+					position: relative;			
+					align-items:center;		
 					flex-direction: column;
 				}
 
@@ -185,7 +196,6 @@ footer .leyenda p a {
 				.list__li {
 					font-size: 1.2em;
 					width: 150px;
-					height: 100%;
 					display: flex;
 					justify-content: center;
 					padding: 25px 0px;
@@ -201,7 +211,7 @@ footer .leyenda p a {
 	.contenedor {
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		margin: 0px 0px 100px 0px;
-		padding: 40px 20px 0px 20px;
+		padding: 70px 20px 0px 20px;
 	}
 	.contenedor .pelicula {
 		width: 350px;
@@ -215,7 +225,7 @@ footer .leyenda p a {
 	.contenedor {
 		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 		margin: 0px 0px 0px 0px;
-		padding: 40px 0px 0px 0px;
+		padding: 100px 0px 0px 0px;
 		justify-items: center;
 	}
 	.contenedor .pelicula {
@@ -223,5 +233,10 @@ footer .leyenda p a {
 		height: 450px;
 		padding: 0px 0px;
 		margin: 15px 0px;
+	}
+	footer{
+		.name__beta{
+			right: 10px;
+		}
 	}
 }
