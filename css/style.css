@@ -64,66 +64,6 @@ header nav .nav__list .menu__responsive {
   display: none;
 }
 
-#checkbox {
-  display: none;
-}
-#checkbox.active #checkbox:checked + .toggle .bars {
-  position: absolute;
-  transition-duration: 200ms;
-}
-#checkbox.active #checkbox:checked + .toggle #bar2 {
-  transform: scaleX(0);
-  transition-duration: 0.1s;
-}
-#checkbox.active #checkbox:checked + .toggle #bar1 {
-  width: 100%;
-  transform: rotate(45deg);
-  transition-duration: 0.5s;
-}
-#checkbox.active #checkbox:checked + .toggle #bar3 {
-  width: 100%;
-  transform: rotate(-45deg);
-  transition-duration: 0.5s;
-}
-#checkbox.active #checkbox:checked + .toggle {
-  transition-duration: 0.5s;
-  transform: rotate(180deg);
-}
-
-.toggle {
-  display: none;
-  position: relative;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
-  transition-duration: 0.5s;
-}
-
-.bars {
-  width: 100%;
-  height: 4px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 4px;
-  display: none;
-}
-
-#bar2 {
-  transition-duration: 0.8s;
-}
-
-#bar1 {
-  width: 50%;
-}
-
-#bar2 {
-  width: 75%;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -142,6 +82,16 @@ body.modo-oscuro .titulo {
   color: #ffffff;
 }
 body.modo-oscuro .name__beta {
+  color: #ffffff;
+}
+
+.anuncio {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.anuncio h1 {
   color: #ffffff;
 }
 

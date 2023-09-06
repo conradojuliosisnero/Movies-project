@@ -1,5 +1,5 @@
 @import "nav";
-@import "menu-responsive";
+
 * {
 	margin: 0;
 	padding: 0;
@@ -18,6 +18,16 @@ body {
 		.name__beta {
 			color: #ffffff;
 		}
+	}
+}
+
+.anuncio{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	h1{
+		color: #ffffff;
 	}
 }
 
