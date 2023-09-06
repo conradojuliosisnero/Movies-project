@@ -1,6 +1,7 @@
 header {
   width: 100%;
   position: fixed;
+  z-index: 20;
 }
 header nav {
   width: 100%;
@@ -12,6 +13,7 @@ header nav {
 }
 header nav .menu__responsive {
   display: none;
+  cursor: pointer;
 }
 header nav .img__nav {
   display: flex;
@@ -47,6 +49,7 @@ header nav .nav__list #Home {
 }
 header nav .nav__list .menu__responsive-quitar {
   display: none;
+  cursor: pointer;
 }
 header nav .nav__list .list__li {
   font-size: 1.2em;
@@ -84,18 +87,19 @@ body.modo-oscuro .name__beta {
 }
 
 .contenedor {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
   width: 100%;
   max-width: 1000px;
   margin: 0px auto 100px auto;
   padding: 150px 0px 0px 0px;
   background-color: transparent;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
 }
 
 .contenedor .pelicula {
   text-align: center;
+  z-index: 10;
 }
 
 .contenedor .contend__poster {
@@ -208,6 +212,7 @@ footer {
   width: 100%;
   height: 50px;
   background: transparent;
+  z-index: 30;
 }
 
 .name__beta {
@@ -234,6 +239,44 @@ footer .leyenda p a {
   font-size: 0.7em;
   padding: 20px 25px;
   border-radius: 0.7em;
+}
+
+.contenedor__ayuda {
+  width: 650px;
+  height: 100vh;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 30px;
+  margin: 0px auto;
+}
+.contenedor__ayuda .text__container {
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  display: flex;
+}
+.contenedor__ayuda .text__container .text {
+  color: #ffffff;
+}
+.contenedor__ayuda .select__idioma {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+}
+.contenedor__ayuda .select__idioma .idioma img {
+  width: 40px;
+  height: 40px;
+  margin: 0px 20px;
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+.contenedor__ayuda .select__idioma .idioma img:hover {
+  transform: scale(1.4);
 }
 
 @media screen and (max-width: 769px) {

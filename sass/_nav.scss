@@ -1,6 +1,7 @@
 header {
 	width: 100%;
 	position: fixed;
+	z-index: 20;
 	nav {
 		width: 100%;
 		padding: 20px 0px;
@@ -10,6 +11,7 @@ header {
         backdrop-filter: blur(10px);
 		.menu__responsive{
 			display: none;
+			cursor: pointer;
 		}
 		.img__nav {
 			display: flex;
@@ -44,6 +46,7 @@ header {
 			}
 			.menu__responsive-quitar{
 				display: none;
+				cursor: pointer;
 			}
 			.list__li {
 				font-size: 1.2em;
