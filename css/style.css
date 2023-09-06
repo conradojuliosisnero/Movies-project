@@ -64,6 +64,66 @@ header nav .nav__list .menu__responsive {
   display: none;
 }
 
+#checkbox {
+  display: none;
+}
+#checkbox.active #checkbox:checked + .toggle .bars {
+  position: absolute;
+  transition-duration: 200ms;
+}
+#checkbox.active #checkbox:checked + .toggle #bar2 {
+  transform: scaleX(0);
+  transition-duration: 0.1s;
+}
+#checkbox.active #checkbox:checked + .toggle #bar1 {
+  width: 100%;
+  transform: rotate(45deg);
+  transition-duration: 0.5s;
+}
+#checkbox.active #checkbox:checked + .toggle #bar3 {
+  width: 100%;
+  transform: rotate(-45deg);
+  transition-duration: 0.5s;
+}
+#checkbox.active #checkbox:checked + .toggle {
+  transition-duration: 0.5s;
+  transform: rotate(180deg);
+}
+
+.toggle {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  transition-duration: 0.5s;
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  display: none;
+}
+
+#bar2 {
+  transition-duration: 0.8s;
+}
+
+#bar1 {
+  width: 50%;
+}
+
+#bar2 {
+  width: 75%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -73,7 +133,6 @@ header nav .nav__list .menu__responsive {
 body {
   font-family: "Montserrat", sans-serif;
   background: #e0e0e0;
-  color: #1d1d1d;
   transition: background-color 300ms ease;
 }
 body.modo-oscuro {
@@ -235,30 +294,34 @@ footer .leyenda {
 
 footer .leyenda p a {
   text-decoration: none;
-  color: #ffffff;
+  color: #9f9f9f;
   font-size: 0.7em;
   padding: 20px 25px;
   border-radius: 0.7em;
 }
+footer .leyenda p a.leyenddark {
+  color: #ffffff;
+}
 
 .contenedor__ayuda {
-  width: 650px;
-  height: 100vh;
-  color: #ffffff;
+  max-width: 650px;
+  min-width: 350px;
+  padding: 120px 30px 70px 30px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 30px;
   margin: 0px auto;
+  position: relative;
+}
+.contenedor__ayuda.texto-oscuro {
+  color: #ffffff;
 }
 .contenedor__ayuda .text__container {
   width: 100%;
   height: 100%;
-  color: #ffffff;
   display: flex;
 }
 .contenedor__ayuda .text__container .text {
-  color: #ffffff;
+  display: flex;
+  color: #000000;
 }
 .contenedor__ayuda .select__idioma {
   position: absolute;
