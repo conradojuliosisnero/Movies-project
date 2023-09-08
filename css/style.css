@@ -47,11 +47,29 @@ header nav .nav__list {
 header nav .nav__list #Home {
   font-size: 1.6em;
 }
+header nav .nav__list .btn__login {
+  order: 1;
+  background-color: #000000;
+  padding: 15px 20px;
+  border-radius: 2em;
+  cursor: pointer;
+}
+header nav .nav__list .btn__login a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+header nav .nav__list .btn__login.dark {
+  background-color: #ffffff;
+}
+header nav .nav__list .btn__login.dark a {
+  color: #000000;
+}
 header nav .nav__list .menu__responsive-quitar {
   display: none;
   cursor: pointer;
 }
 header nav .nav__list .list__li {
+  order: 2;
   font-size: 1.2em;
   padding: 15px 20px;
   position: relative;
@@ -331,10 +349,12 @@ footer .leyenda p a.leyenddark {
   }
   header nav .nav__list.active {
     display: flex;
+    height: 100vh;
     padding: 150px 0px;
     position: relative;
     align-items: center;
     flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.0666666667);
   }
   header nav .nav__list .menu__responsive-quitar {
     display: none;
@@ -369,6 +389,9 @@ footer .leyenda p a.leyenddark {
     height: 550px;
     padding: 25px;
     margin: 15px 0px;
+  }
+  form {
+    width: 350px;
   }
 }
 @media screen and (max-width: 425px) {
