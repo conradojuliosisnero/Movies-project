@@ -10,7 +10,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/43cf05dd1c.js" crossorigin="anonymous"></script>
-	<link rel="icon" href="../img/movies.png">
+	<link rel="icon" href="img/movies.png">
 	<title>MoviesCon</title>
 </head>
 <body>
@@ -29,11 +29,11 @@
 				<div class="menu__responsive-quitar">
 					<i class="fa-solid fa-x" id="menu__ocultar"></i>
 				</div>
-				<li class="list__li" id="Home"><a href="index.html">Home</a></li>
 				<li class="list__li"><a href="#">Movies</a></li>
 				<li class="list__li"><a href="#">Series</a></li>
 				<li class="list__li"><a href="#">Kids</a></li>
 				<li class="list__li"><a href="html/help.html">Help</a></li>
+				<span class="btn__login"><a href="html/login.html">Login</a></span>
 				<!-- toggle dark  -->
 				<label class="switch">
 					<span class="sun"
@@ -57,6 +57,14 @@
 	</header>
 	<!-- contenedor  -->
 	<main class="contenedor" id="contenedor">
+		<div class="filter">
+			<select name="filter" id="">
+				<option value="">Popular</option>
+				<option value="">Accion</option>
+				<option value="">Comedia</option>
+				<option value="">Terror</option>
+			</select>
+		</div>
 	</main>
 
 	<!-- footer  -->
