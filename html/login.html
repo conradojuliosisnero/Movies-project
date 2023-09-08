@@ -4,21 +4,21 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/toogle-dark.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/style-login.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap"
 			rel="stylesheet" />
-		<link rel="stylesheet" href="../css/style.css" />
-		<link rel="stylesheet" href="../css/toogle-dark.css" />
 		<script
 			src="https://kit.fontawesome.com/43cf05dd1c.js"
 			crossorigin="anonymous"></script>
-		<link rel="icon" href="../img/movies.png" />
-		<title>Movies</title>
+		<link rel="icon" href="./../img/movies.png" />
+		<title>MoviesCon</title>
 	</head>
 	<body>
-		<!-- header  -->
 		<header id="header">
 			<nav class="nav">
 				<div class="menu__responsive">
@@ -34,11 +34,12 @@
 					<div class="menu__responsive-quitar">
 						<i class="fa-solid fa-x" id="menu__ocultar"></i>
 					</div>
-					<li class="list__li" id="Home"><a href="../index.html">Home</a></li>
+					<li class="list__li"><a href="../index.html" id="home">Home</a></li>
 					<li class="list__li"><a href="#">Movies</a></li>
 					<li class="list__li"><a href="#">Series</a></li>
 					<li class="list__li"><a href="#">Kids</a></li>
-					<li class="list__li"><a href="help.html">Help</a></li>
+					<li class="list__li"><a href="html/help.html">Help</a></li>
+					<span class="btn__login"><a href="#">Login</a></span>
 					<!-- toggle dark  -->
 					<label class="switch">
 						<span class="sun"
@@ -60,51 +61,74 @@
 				</ul>
 			</nav>
 		</header>
-		<!-- contenedor  -->
-		<main class="contenedor__ayuda">
-			<div class="tex__container">
-				<p class="text titulo">
-					¡Hola a todos! 👋 Quiero compartir con ustedes mi emocionante
-					proyecto: 🎥 mi página web de películas. Estoy trabajando
-					incansablemente en su desarrollo, y quiero que sepan que esto es solo
-					el comienzo. <br><br> 🚀 Entiendo que esta web está en constante evolución, así
-					que no se sorprendan si ven algunos cambios por aquí.👷‍♂️ Estoy
-					haciendo todo lo posible para que sea la mejor experiencia para todos
-					los amantes del cine como yo. ¡Tus comentarios y sugerencias son más
-					que bienvenidos!<br><br> 🙌 Una de las cosas más emocionantes que estoy
-					creando es la sección de reseñas, información y sinopsis de cada
-					película. 📝 Estoy comprometido a brindarte reseñas detalladas,
-					información completa sobre el elenco y una sinopsis que te hará desear
-					ver la película de inmediato.<br><br> 🍿 Mi objetivo es convertir esta página
-					web en tu compañero de confianza para tus noches de cine. Pero
-					recuerda, como soy solo uno, es posible que veas cambios en el diseño
-					y el contenido mientras perfecciono todo. ¡Pero eso solo significa que
-					estoy trabajando duro para hacerlo aún mejor!<br><br> 💪 Gracias por unirte a
-					mí en este emocionante viaje cinéfilo. ¡Estoy emocionado por lo que el
-					futuro nos depara y no puedo esperar para compartirlo contigo! 🌟
-					¡Mantente atento a las actualizaciones y disfruta de la magia del cine
-					conmigo! 🎬😊
-				</p>
+		<!-- form contend  -->
+		<form id="form">
+			<!-- contend  -->
+			<div class="contend__form">
+				<div class="contend__form--tittle">
+					<label> Login </label>
+				</div>
+				<div class="contend__form--text">
+					<p>
+						¡Bienvenidos a nuestra plataforma en línea! Estamos encantados de
+						recibirte. Por favor, ingresa tu usuario y contraseña para acceder a
+						todos nuestros emocionantes contenidos y servicios exclusivos. Tu
+						aventura digital comienza aquí.
+					</p>
+				</div>
+				<div class="contend__form--logins">
+					<div>
+						<a class="" href="#"><i class="fa-brands fa-google"></i></a>
+					</div>
+					<div>
+						<a class="" href="#"><i class="fa-brands fa-facebook"></i></a>
+					</div>
+				</div>
 			</div>
-			<div class="select__idioma">
-				<div class="idioma ingles"><img src="../img/estados-unidos.png" alt=""></div>
-				<div class="idioma frances"><img src="../img/francia.png" alt=""></div>
-				<div class="idioma espaniol"><img src="../img/thumb.png" alt=""></div>
-				<div class="idioma portugues"><img src="../img/brasil.png" alt=""></div>
+			<!-- form inputs  -->
+			<div class="form__inputs--container">
+				<div class="form__tittle">
+					<h1><a href="../index.html">MoviesCon</a></h1>
+				</div>
+				<!-- form inputs  -->
+				<div class="form__inputs">
+					<input class="form__input--text" type="text" placeholder="UserName" />
+					<div class="form__container__input--password">
+						<input
+							class="form__input--password"
+							type="password"
+							placeholder="Password" />
+						<i class="icon__eye--slash fa-solid fa-eye-slash"></i>
+						<i class="icon__eye--open fa-solid fa-eye"></i>
+					</div>
+				</div>
+
+				<!-- form buttom  -->
+				<button class="Btn">
+  
+					<div class="sign"><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
+					
+					<div class="text"><a href="../index.html">Login</a></div>
+				  </button>
+				  
+	
 			</div>
-		</main>
+		</form>
+
 		<!-- footer  -->
 		<footer>
 			<div class="leyenda">
 				<p>
-					<a href="https://github.com/conradojuliosisnero">Desing by @julioConrado</a>
+					<a href="https://github.com/conradojuliosisnero"
+						>Desing by @julioConrado</a
+					>
 				</p>
 			</div>
 			<span class="name__beta">BETA</span>
 		</footer>
 		<!-- script  -->
-		<script type="module" src="../Js/dark-mode.js"></script>
-		<script type="module" src="../Js/dark-mode-help.js"></script>
-		<script type="module" src="../Js/responsive.js"></script>
+		<script src="../Js/form.js"></script>
+		<script src="../Js/responsive.js"></script>
+		<script src="../Js/dark-mode.js"></script>
 	</body>
 </html>
