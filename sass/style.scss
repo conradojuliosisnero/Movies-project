@@ -99,6 +99,8 @@ body {
 
 }
 
+
+
 .paginacion {
 	position: fixed;
 	bottom: 0;
@@ -160,6 +162,7 @@ footer {
 	background: transparent;
 	z-index: 30;
 }
+
 .name__beta {
 	position: absolute;
 	right: 50px;
@@ -228,10 +231,12 @@ footer .leyenda p a {
 				}
 				&.active{
 					display: flex;
+					height: 100vh;
 					padding: 150px 0px;
 					position: relative;			
 					align-items:center;		
 					flex-direction: column;
+					background-color: #00000011;
 				}
 
 				.menu__responsive-quitar{
@@ -272,6 +277,10 @@ footer .leyenda p a {
 		margin: 15px 0px;
 	}
 
+	form{
+		width: 350px;
+		
+	}
 }
 
 @media screen and (max-width: 425px) {

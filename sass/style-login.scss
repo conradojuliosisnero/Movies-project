@@ -1,0 +1,547 @@
+$font1: "Outfit", sans-serif;
+$font2: "REM", sans-serif;
+
+body {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+}
+
+// form
+form {
+	display: flex;
+	min-width: 350px;
+	max-width: 770px;
+	height: 450px;
+	background-image: url(../img/peliculas.webp);
+	background-position: center;
+	background-size: cover;
+	border-radius: 0.7em;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+
+	// contend form
+	.contend__form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		.contend__form--tittle {
+			width: 100%;
+			height: 50px;
+			display: flex;
+			flex-grow: 2;
+			justify-content: flex-start;
+			align-items: center;
+			label {
+                background-color: #0000001b;
+                margin-left: 25px;
+                border-radius: .7em;
+                padding: 10px 20px;
+				font-size: 1.5em;
+                backdrop-filter: blur(5px);
+				color: #ffffff;
+                font-weight: 700;
+                font-size: 2em;
+			}
+		}
+		.contend__form--text {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			flex-grow: 3;
+			p {
+				font-weight: 600;
+				font-size: 0.9em;
+                margin-left: 25px;
+				color: #ffffff;
+                border-radius: .7em;
+				padding: 0px 30px;
+				text-align: left;
+				line-height: 25px;
+				width: 70%;
+                background-color: #00000016;
+                backdrop-filter: blur(5px);
+			}
+		}
+		.contend__form--logins {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-grow: 1;
+			a {
+                background-color: #ffffff3f;
+				padding: 10px;
+                border-radius: .7em;
+                width: 35px;
+				height: 35px;
+				margin: 20px 20px;
+				color: #ffffff;
+				font-size: 2.1em;
+				transition: color 0.2s;
+				&:hover {
+					color: #000000;
+				}
+				i {
+					transition: transform 200ms ease;
+					&:hover {
+						transform: scale(1.3);
+					}
+				}
+			}
+		}
+	}
+
+	// contend inpunts
+	.form__inputs--container {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 350px;
+		height: 100%;
+		padding: 0px 30px;
+		background-color: rgb(0, 0, 0, 0.1);
+		backdrop-filter: blur(3px);
+		right: 0;
+		top: 0;
+
+		.form__tittle {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-grow: 4;
+			h1 {
+                font-size: 2.3em;
+				font-weight: 600;
+                a{
+                    text-decoration: none;
+                    color: #ffffff;
+                }
+			}
+		}
+		.form__inputs {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			flex-grow: 3;
+			position: relative;
+			.input {
+				width: 250px;
+				height: 2.9em;
+				border: none;
+				outline: none;
+				background-color: #ffffff;
+				margin: 15px 0px;
+				padding: 10px 15px;
+				border-radius: 0.5em;
+				&:focus {
+					border: #d1b818 solid 2px;
+				}
+			}
+
+			.form__input--text {
+				@extend .input;
+				position: relative;
+			}
+			.form__input--password {
+				@extend .input;
+				position: relative;
+			}
+
+			.form__container__input--password {
+				width: 100%;
+				position: relative;
+				.icon__eye--slash {
+					display: none;
+					position: absolute;
+					right: 5px;
+					top: 23px;
+					color: #000000;
+					cursor: pointer;
+				}
+
+				.icon__eye--open {
+					display: flex;
+					position: absolute;
+					right: 5px;
+					top: 23px;
+					color: #000000;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.form__btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 70px;
+            cursor: pointer;
+			.cssbuttons-io-button {
+				background: #000000;
+				color: white;
+				font-family: inherit;
+				padding: 0.35em;
+				padding-left: 1.2em;
+				font-size: 17px;
+				font-weight: 500;
+				border-radius: 0.9em;
+				border: none;
+				letter-spacing: 0.05em;
+				display: flex;
+				align-items: center;
+				box-shadow: inset 0 0 1.6em -0.6em #000000;
+				overflow: hidden;
+				position: relative;
+				height: 2.8em;
+				padding-right: 3.3em;
+                cursor: pointer;
+
+			}
+
+			.cssbuttons-io-button .icon {
+				background: white;
+				margin-left: 1em;
+				position: absolute;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 2.2em;
+				width: 2.2em;
+				border-radius: 0.7em;
+				box-shadow: 0.1em 0.1em 0.6em 0.2em #000000;
+				right: 0.3em;
+				transition: all 0.3s;
+			}
+
+			.cssbuttons-io-button:hover .icon {
+				width: calc(100% - 0.6em);
+			}
+
+			.cssbuttons-io-button .icon svg {
+				width: 1.1em;
+				transition: transform 0.3s;
+				color: #000000;
+			}
+
+			.cssbuttons-io-button:hover .icon svg {
+				transform: translateX(0.1em);
+			}
+
+			.cssbuttons-io-button:active .icon {
+				transform: scale(0.95);
+			}
+		}
+
+		.Btn {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			width: 45px;
+			height: 45px;
+			border: none;
+			border-radius: 50%;
+			cursor: pointer;
+			position: relative;
+			margin: 0px 0px 20px 0px;
+			overflow: hidden;
+			transition-duration: .3s;
+			box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+			background-color: rgb(0, 0, 0);
+		  }
+		  
+		  /* plus sign */
+		  .sign {
+			width: 100%;
+			transition-duration: .3s;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		  }
+		  
+		  .sign svg {
+			width: 17px;
+		  }
+		  
+		  .sign svg path {
+			fill: white;
+		  }
+		  /* text */
+		  .text {
+			position: absolute;
+			right: 0%;
+			width: 0%;
+			opacity: 0;
+			color: white;
+			font-size: 1.2em;
+			font-weight: 600;
+			transition-duration: .3s;
+			a{
+				text-decoration: none;
+				color: #ffffff;
+			}
+		  }
+		  /* hover effect on button width */
+		  .Btn:hover {
+			width: 125px;
+			border-radius: 40px;
+			transition-duration: .3s;
+		  }
+		  
+		  .Btn:hover .sign {
+			width: 30%;
+			transition-duration: .3s;
+			padding-left: 20px;
+		  }
+		  /* hover effect button's text */
+		  .Btn:hover .text {
+			opacity: 1;
+			width: 70%;
+			transition-duration: .3s;
+			padding-right: 10px;
+		  }
+		  /* button click effect*/
+		  .Btn:active {
+			transform: translate(2px ,2px);
+		  }
+	}
+}
+
+@media screen and (max-width: 769px) {
+	form{
+		width: 550px;
+		overflow: none;
+		flex-direction: column;
+		align-items: center;
+		.contend__form {
+			order: 1;
+			flex-grow: 4;
+			height: 40%;
+		.contend__form--tittle {
+			justify-content: center;
+			margin: 20px 0px;
+			display: none;
+		}
+		.contend__form--text {
+			display: none;
+			justify-content: center;
+			margin: 0px 0px 10px 0px;
+		}
+		.contend__form--logins {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-grow: 1;
+			position: absolute;
+			bottom:20px;
+			z-index: 100;
+			a {
+                background-color: #000000;
+				margin: 20px 10px;
+				&:hover {
+					color: #ffffff;
+				}
+			}
+		}
+	}
+		.form__inputs--container {
+			order: 2;
+			display: flex;
+			width: 100%;
+			height: 70%;
+			flex-grow: 1;
+			bottom: 0;
+			background-color: rgb(255, 255, 255);
+			left: 0;
+			bottom: 0;
+			.form__tittle {
+				position: absolute;
+				top: -150px;
+				h1 {
+					font-size: 2.3em;
+					font-weight: 600;
+					a{
+						text-decoration: none;
+						color: #c5c5c5;
+					}
+				}
+			}
+			.form__inputs {
+				display: flex;
+				width: 100%;
+				align-items: center;
+
+				.input {
+					background-color: #e0e0e0;
+					&:focus {
+						border: #187bd1 solid 2px;
+					}
+				}
+				.form__container__input--password {
+					display: flex;
+					justify-content: center;
+					.icon__eye--slash {
+						right: 75px;
+					}
+	
+					.icon__eye--open {
+						right: 75px;
+					}
+				}
+			}
+
+		}
+	}
+}
+
+@media screen and (max-width: 425px) {
+	form{
+		width: 350px;
+		.contend__form {
+			width: 100%;
+			order: 1;
+			flex-grow: 4;
+			height: 40%;
+		.contend__form--tittle {
+			justify-content: center;
+			margin: 20px 0px;
+			display: none;
+		}
+		.contend__form--text {
+			display: none;
+			justify-content: center;
+			margin: 0px 0px 10px 0px;
+		}
+		.contend__form--logins {
+			display: none;
+			a {
+                background-color: #000000;
+				margin: 20px 10px;
+				&:hover {
+					color: #ffffff;
+				}
+			}
+		}
+	}
+		.form__inputs--container {
+			order: 2;
+			display: flex;
+			width: 100%;
+			height: 70%;
+			flex-grow: 1;
+			background-color: rgb(255, 255, 255);
+			// backdrop-filter: blur(3px);
+			left: 0;
+			bottom: 0;
+			.form__tittle {
+				position: absolute;
+				top: -150px;
+				h1 {
+					font-size: 2.3em;
+					font-weight: 600;
+					a{
+						text-decoration: none;
+						color: #c5c5c5;
+					}
+				}
+			}
+			.form__inputs {
+				display: flex;
+				width: 100%;
+				align-items: center;
+
+				.input {
+					background-color: #e0e0e0;
+					&:focus {
+						border: #187bd1 solid 2px;
+					}
+				}
+				.form__container__input--password {
+					display: flex;
+					justify-content: center;
+					.icon__eye--slash {
+						right: 27px;
+					}
+	
+					.icon__eye--open {
+						right: 27px;
+					}
+				}
+			}
+	
+			.form__btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 70px;
+				cursor: pointer;
+				.cssbuttons-io-button {
+					background: #000000;
+					color: white;
+					font-family: inherit;
+					padding: 0.35em;
+					padding-left: 1.2em;
+					font-size: 17px;
+					font-weight: 500;
+					border-radius: 0.9em;
+					border: none;
+					letter-spacing: 0.05em;
+					display: flex;
+					align-items: center;
+					box-shadow: inset 0 0 1.6em -0.6em #000000;
+					overflow: hidden;
+					position: relative;
+					height: 2.8em;
+					padding-right: 3.3em;
+					cursor: pointer;
+	
+				}
+	
+				.cssbuttons-io-button .icon {
+					background: white;
+					margin-left: 1em;
+					position: absolute;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 2.2em;
+					width: 2.2em;
+					border-radius: 0.7em;
+					box-shadow: 0.1em 0.1em 0.6em 0.2em #000000;
+					right: 0.3em;
+					transition: all 0.3s;
+				}
+	
+				.cssbuttons-io-button:hover .icon {
+					width: calc(100% - 0.6em);
+				}
+	
+				.cssbuttons-io-button .icon svg {
+					width: 1.1em;
+					transition: transform 0.3s;
+					color: #000000;
+				}
+	
+				.cssbuttons-io-button:hover .icon svg {
+					transform: translateX(0.1em);
+				}
+	
+				.cssbuttons-io-button:active .icon {
+					transform: scale(0.95);
+				}
+			}
+		}
+	}
+}
+
