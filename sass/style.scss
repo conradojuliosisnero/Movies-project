@@ -18,6 +18,12 @@ body {
 		.name__beta {
 			color: #ffffff;
 		}
+		.contend__overview{
+			color: #ffffff;
+		}
+		.regresar__overview{
+			color: #ffffff;
+		}
 	}
 }
 
@@ -40,11 +46,88 @@ body {
 	margin: 0px auto 100px auto;
 	padding: 150px 0px 0px 0px;
 	background-color: transparent;
+	&.movie__view{
+		display: flex;
+	}
 }
 
 .contenedor .pelicula {
 	text-align: center;
 	z-index: 10;
+	display: block;
+	transition: display 300ms ease;
+	&.oculta{
+		display: none;
+		transition: display 300ms ease;
+	}
+	&.movie__view{
+		margin: 0px 0px 0px 0px;
+		width: 100%;
+		padding: 30px 0px 0px 0px;
+		display: flex;
+		position: relative;
+		.regresar__overview{
+			font-size: 2.5em;
+			position: absolute;
+			right: -30px;
+			top: -50px;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.contend__poster{
+			flex-grow: 6;
+			display: flex;
+			width: 380px;
+			height: 450px;
+			margin-left: 20px;
+			cursor:auto;
+			.poster{
+				width: 100%;
+				height: 100%;
+				display: flex;
+				object-fit: cover;
+			}
+			.contend__hover{
+				display: none;
+			}
+		}
+		.titulo{
+			font-size: 2.4em;
+			position: absolute;
+			top: -65px;
+			left: 20px;
+		}
+		.contend__overview{
+			display: flex;
+			flex-shrink:6;
+			flex-direction: column;
+			padding: 20px 0px 0px 30px;
+			.sinopsis{
+				display: flex;
+				text-align: start;
+				line-height: 25px;
+				font-size: 1.5em;
+				margin-bottom: 20px;
+			}
+			.popularity{
+				font-size: 1.5em;
+				display: flex;
+				justify-content: flex-start;
+				margin-bottom: 20px;
+				
+			}
+			.publicacion{
+				font-size: 1.5em;
+				display: flex;
+				justify-content: flex-start;
+
+			}
+		}
+	}
+}
+
+.contend__overview{
+	display: none;
 }
 
 .contenedor .contend__poster{

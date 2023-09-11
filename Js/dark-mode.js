@@ -4,13 +4,13 @@ const nav = document.querySelector(".nav");
 const slaider = document.querySelector(".slider");
 const leyend = document.querySelector(".leyenda p a");
 const btnLogin = document.querySelector(".btn__login");
-
 // listener de modo oscuro
 btndarkMode.addEventListener("click", () => {
 	document.body.classList.toggle("modo-oscuro");
 	nav.classList.toggle("nav-dark");
     leyend.classList.toggle("leyend_dark");
     btnLogin.classList.toggle("dark");
+
 	// modo guardado en localstorage modo oscuro
 	if (document.body.classList.contains("modo-oscuro")) {
 		localStorage.setItem("oscuro", "true");
@@ -25,7 +25,7 @@ if (localStorage.getItem("oscuro") === "true") {
 	nav.classList.add("nav-dark");
     leyend.classList.add("leyend_dark");
     btnLogin.classList.add("dark");
-
+	
 } else {
 	document.body.classList.remove("modo-oscuro");
 	nav.classList.remove("nav-dark");
