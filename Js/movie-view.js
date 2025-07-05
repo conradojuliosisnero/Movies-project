@@ -13,6 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hacer la aplicación accesible globalmente para debugging
     window.moviesApp = moviesApp;
     
-    console.log('Aplicación de películas inicializada correctamente');
+    //.log('Aplicación de películas inicializada correctamente');
   }
 });

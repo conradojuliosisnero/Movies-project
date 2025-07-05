@@ -1,65 +1,115 @@
 @import "nav";
+@import "movie-details";
 
 // ===============================
-// Variables y colores base
+// Variables y colores base mejorados
 // ===============================
-$color-primario: #2476f9;
-$color-secundario: #000000;
-$color-fondo: #e0e0e0;
-$color-fondo-oscuro: #181818;
-$color-acento: #ffd43b;
-$color-texto: #222;
-$color-texto-oscuro: #fff;
-$color-hover: #137c32;
-$color-card: #fff;
-$color-card-oscuro: #232323;
-$radius: 0.9em;
-$shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+:root {
+  --color-primario: #2476f9;
+  --color-primario-rgb: 36, 118, 249;
+  --color-secundario: #000000;
+  --color-fondo: #f5f5f5;
+  --color-fondo-oscuro: #0a0a0a;
+  --color-acento: #4fc3f7;
+  --color-texto: #333;
+  --color-texto-oscuro: #ffffff;
+  --color-hover: #137c32;
+  --color-card: #ffffff;
+  --color-card-oscuro: #1a1a1a;
+  --radius: 1rem;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Mixins útiles
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin glass-effect($opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@mixin hover-effect {
+  transition: var(--transition);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+@mixin responsive-grid($min: 200px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
 
 // ===============================
-// Reset y base
+// Reset y base mejorados
 // ===============================
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
-  background: $color-fondo;
-  color: $color-texto;
-  transition: background 0.3s, color 0.3s;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  transition: var(--transition);
   min-height: 100vh;
-}
-body.modo-oscuro {
-  background: $color-fondo-oscuro;
-  color: $color-texto-oscuro;
+  line-height: 1.6;
+  
+  &.modo-oscuro {
+    background: var(--color-fondo-oscuro);
+    color: var(--color-texto-oscuro);
+    
+    --color-card: var(--color-card-oscuro);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
 }
 
 // ===============================
-// Header y navegación
+// Header y navegación mejorados
 // ===============================
 header {
   width: 100%;
   position: fixed;
-  z-index: 20;
-  background: transparent;
+  z-index: 1000;
+  top: 0;
+  left: 0;
 }
+
 nav {
   width: 100%;
-  padding: 18px 0;
+  padding: 1rem 0;
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(10px);
+  @include glass-effect(0.15);
   position: relative;
-  box-shadow: $shadow;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 .menu__responsive {
   display: none;
   cursor: pointer;
   font-size: 2em;
-  color: $color-texto-oscuro;
+  color: var(--color-texto-oscuro);
 }
 .img__nav {
   display: flex;
@@ -76,7 +126,7 @@ nav {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   }
   span {
-    color: $color-texto-oscuro;
+    color: var(--color-texto-oscuro);
     font-weight: 700;
     font-size: 1.2em;
   }
@@ -91,157 +141,270 @@ nav {
   .list__li {
     font-size: 1.1em;
     padding: 12px 18px;
-    border-radius: $radius;
+    border-radius: var(--radius);
     transition: background 0.2s;
     a {
-      color: $color-texto-oscuro;
+      color: var(--color-texto-oscuro);
       text-decoration: none;
       font-weight: 500;
       &:hover {
-        color: $color-acento;
+        color: var(--color-acento);
       }
     }
     &:hover {
-      background: rgba($color-primario, 0.08);
+      background: rgba(var(--color-primario-rgb), 0.08);
     }
   }
   .btn__login {
-    background: $color-primario;
-    color: $color-texto-oscuro;
-    border-radius: $radius;
+    background: var(--color-primario);
+    color: var(--color-texto-oscuro);
+    border-radius: var(--radius);
     padding: 10px 22px;
     margin-left: 10px;
     font-weight: 600;
     transition: background 0.2s, color 0.2s;
     a {
-      color: $color-texto-oscuro;
+      color: var(--color-texto-oscuro);
       text-decoration: none;
     }
     &:hover {
-      background: $color-hover;
-      color: $color-acento;
+      background: var(--color-hover);
+      color: var(--color-acento);
     }
   }
 }
 
 // ===============================
-// Contenedor de películas
+// Contenedor de películas mejorado
 // ===============================
 .contenedor {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 32px;
+  @include responsive-grid(220px);
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto 100px auto;
-  padding: 120px 24px 0 24px;
+  max-width: 1400px;
+  margin: 0 auto 6rem auto;
+  padding: clamp(6rem, 10vh, 8rem) clamp(1rem, 3vw, 2rem) 0;
   background: transparent;
+  
+  &.movie__view {
+    display: flex;
+  }
+}
+
+// Eliminar espaciado para página de detalles
+.movie-detail-page .contenedor,
+.movie-detail-page main.contenedor {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
 }
 .pelicula {
-  background: $color-card;
-  border-radius: $radius;
-  box-shadow: $shadow;
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-  &:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
-  }
+  position: relative;
+  @include hover-effect;
+  
   .poster {
     width: 100%;
-    height: 320px;
+    height: clamp(280px, 40vw, 350px);
     object-fit: cover;
-    border-radius: $radius $radius 0 0;
+    transition: var(--transition);
   }
+  
   .titulo {
-    font-size: 1.2em;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     font-weight: 600;
-    margin: 12px 0 6px 0;
-    color: $color-texto;
+    margin: 1rem;
+    color: var(--color-texto);
+    text-align: center;
+    line-height: 1.4;
   }
-  .contend__hover {
-    background: rgba($color-primario, 0.12);
-    backdrop-filter: blur(6px);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s;
-    a {
-      color: $color-texto-oscuro;
-      font-size: 1.1em;
-      background: $color-primario;
-      padding: 8px 18px;
-      border-radius: $radius;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      &:hover {
-        background: $color-hover;
-        color: $color-acento;
+  
+  .contend__poster {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    
+    .contend__hover {
+      @include glass-effect(0.15);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      @include flex-center;
+      opacity: 0;
+      transition: var(--transition);
+      transform: translateY(20px);
+      
+      a {
+        color: white;
+        font-size: 1.1rem;
+        background: var(--color-primario);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        
+        &:hover {
+          background: var(--color-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+    
+    &:hover {
+      .contend__hover {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .poster {
+        transform: scale(1.05);
       }
     }
   }
-  &:hover .contend__hover {
-    opacity: 1;
+  
+  // Estados especiales
+  &.oculta {
+    display: none;
+  }
+  
+  // Vista de película individual (legacy)
+  &.movie__view {
+    margin: 0;
+    width: 100%;
+    padding: 2rem 0 0 0;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    
+    .regresar__overview {
+      font-size: 2.5rem;
+      position: absolute;
+      right: -2rem;
+      top: -3rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    
+    .contend__poster {
+      flex: 0 0 auto;
+      width: 380px;
+      height: 450px;
+      margin-left: 1.25rem;
+      cursor: auto;
+      
+      .poster {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .contend__hover {
+        display: none;
+      }
+    }
+    
+    .titulo {
+      font-size: 2.4rem;
+      position: absolute;
+      top: -4rem;
+      left: 1.25rem;
+      margin: 0;
+    }
+    
+    .contend__overview {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 1.25rem 0 0 2rem;
+      
+      .sinopsis {
+        display: flex;
+        text-align: start;
+        line-height: 1.6;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+      }
+      
+      .popularity,
+      .publicacion {
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 1.25rem;
+      }
+    }
   }
 }
 
 // ===============================
-// Modo oscuro para tarjetas
+// Estados adicionales
 // ===============================
-body.modo-oscuro .pelicula {
-  background: $color-card-oscuro;
-  .titulo {
-    color: $color-texto-oscuro;
-  }
+.contend__overview {
+  display: none;
 }
 
 // ===============================
-// Footer
+// Footer mejorado
 // ===============================
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 30;
+  height: 3.5rem;
+  @include glass-effect(0.08);
+  @include flex-center;
+  z-index: 900;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
   .leyenda {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
+    height: 100%;
+    @include flex-center;
+    
     p a {
-      color: #9f9f9f;
-      font-size: 0.9em;
-      padding: 12px 20px;
-      border-radius: $radius;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
       text-decoration: none;
+      transition: var(--transition);
+      
       &:hover {
-        color: $color-primario;
-        background: rgba($color-primario, 0.08);
+        color: var(--color-primario);
+        background: rgba(255, 255, 255, 0.1);
+      }
+      
+      &.leyenddark {
+        color: white;
       }
     }
   }
+  
   .name__beta {
     position: absolute;
-    right: 40px;
-    color: #474747;
+    right: 2.5rem;
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 600;
-    font-size: 1em;
+    font-size: 0.9rem;
+    
+    @media (max-width: 480px) {
+      right: 1rem;
+      font-size: 0.8rem;
+    }
   }
 }
 
@@ -303,24 +466,279 @@ footer {
         font-size: 1.3em;
         padding: 18px 0;
         border-radius: 0;
-        &:hover {
-          background: rgba($color-primario, 0.1);
-        }
-      }
-      .btn__login {
-        margin: 20px 0 0 0;
-        width: 80vw;
-        text-align: center;
       }
     }
   }
+}
+
+// ===============================
+// Responsive Design mejorado
+// ===============================
+
+// Tablets y pantallas medianas
+@media (max-width: 1024px) {
   .contenedor {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 80px 4vw 0 4vw;
+    @include responsive-grid(200px);
+    padding: clamp(5rem, 8vh, 7rem) clamp(1rem, 2.5vw, 1.5rem) 0;
   }
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    @include responsive-grid(180px);
+    padding: clamp(4rem, 6vh, 6rem) 1rem 0;
+  }
+  
+  nav {
+    padding: 0.75rem 0;
+    
+    .nav__list {
+      gap: 0.5rem;
+    }
+  }
+}
+
+// Móviles
+@media (max-width: 600px) {
+  header {
+    position: fixed;
+  }
+  
+  nav {
+    padding: 0.75rem 0;
+    
+    .menu__responsive {
+      display: flex;
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: white;
+      z-index: 1001;
+    }
+    
+    .img__nav {
+      left: 1rem;
+      
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+      
+      span {
+        font-size: 1rem;
+      }
+    }
+    
+    .nav__list {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(20px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      
+      &.active {
+        display: flex;
+      }
+      
+      .list__li {
+        width: 100%;
+        text-align: center;
+        font-size: 1.3rem;
+        padding: 1.25rem 0;
+        border-radius: 0;
+        transition: var(--transition);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+      
+      .btn__login {
+        margin: 1.5rem 0 0 0;
+        width: 80vw;
+        max-width: 300px;
+        text-align: center;
+        padding: 1rem 2rem;
+      }
+    }
+  }
+  
+  .contenedor {
+    @include responsive-grid(160px);
+    padding: clamp(3rem, 5vh, 5rem) 1rem 0;
+  }
+  
+  .pelicula {
+    .poster {
+      height: clamp(240px, 35vw, 280px);
+    }
+    
+    .titulo {
+      font-size: 1rem;
+      margin: 0.75rem;
+    }
+  }
+}
+
+// Móviles pequeños
+@media (max-width: 425px) {
+  .contenedor {
+    @include responsive-grid(140px);
+    padding: clamp(3rem, 5vh, 5rem) 0.75rem 0;
+    justify-items: center;
+  }
+  
+  .pelicula {
+    max-width: 200px;
+    
+    .poster {
+      height: clamp(200px, 30vw, 250px);
+    }
+    
+    .titulo {
+      font-size: 0.9rem;
+      margin: 0.5rem;
+    }
+  }
+  
+  nav {
+    .img__nav {
+      left: 0.75rem;
+      
+      span {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .menu__responsive {
+      right: 0.75rem;
+    }
+  }
+  
   footer .name__beta {
-    right: 10px;
-    font-size: 0.9em;
+    right: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+// ===============================
+// Utilidades adicionales
+// ===============================
+
+// Scroll personalizado
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primario);
+  border-radius: 4px;
+  
+  &:hover {
+    background: var(--color-acento);
+  }
+}
+
+// Animaciones suaves
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+// Nuevas animaciones
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Focus accesible
+button:focus,
+a:focus,
+input:focus {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+// ===============================
+// Estilos adicionales para animaciones mejoradas
+// ===============================
+
+// Estado cuando el menú móvil está abierto
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+// Animación para elementos del menú móvil
+.nav__list.active .list__li {
+  animation: slideInFromBottom 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.nav__list.active .btn__login {
+  animation: slideInFromBottom 0.5s ease forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+// Efecto de carga mejorado
+body.js-loaded {
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+}
+
+// Mejoras de rendimiento
+.pelicula {
+  will-change: transform;
+  
+  &:hover {
+    will-change: auto;
+  }
+}
+
+// Estilos para header con scroll
+header.scrolled {
+  .img__nav {
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    
+    span {
+      font-size: 1.1rem;
+    }
   }
 }

@@ -62,7 +62,7 @@ export class FavoritesManager {
       const stored = localStorage.getItem(this.storageKey);
       return stored ? JSON.parse(stored) : [];
     } catch (error) {
-      console.error('Error al cargar favoritos:', error);
+      //.error('Error al cargar favoritos:', error);
       return [];
     }
   }
@@ -74,7 +74,7 @@ export class FavoritesManager {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
     } catch (error) {
-      console.error('Error al guardar favoritos:', error);
+      //.error('Error al guardar favoritos:', error);
     }
   }
 
@@ -146,7 +146,7 @@ export function integrateFavorites(moviesApp) {
 
   // Escuchar cambios en favoritos
   document.addEventListener('favoritesChanged', (event) => {
-    console.log('Favoritos actualizados:', event.detail.favorites);
+    //.log('Favoritos actualizados:', event.detail.favorites);
   });
 
   return favoritesManager;

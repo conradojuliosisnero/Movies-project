@@ -1,0 +1,256 @@
+header {
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+header nav {
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+header nav .menu__responsive {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+header nav .menu__responsive:hover {
+  color: var(--color-acento, #4fc3f7);
+  transform: scale(1.1);
+}
+header nav .img__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+header nav .img__nav img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+header nav .img__nav img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+header nav .img__nav span {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+header nav .img__nav.active {
+  display: none;
+}
+header nav .nav__list {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+header nav .nav__list #Home {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+header nav .nav__list .btn__login {
+  order: 1;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+header nav .nav__list .btn__login a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+header nav .nav__list .btn__login:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+header nav .nav__list .btn__login.dark {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+header nav .nav__list .btn__login.dark a {
+  color: #000000;
+}
+header nav .nav__list .btn__login.dark:hover {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+header nav .nav__list .menu__responsive-quitar {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+header nav .nav__list .menu__responsive-quitar:hover {
+  color: var(--color-acento, #4fc3f7);
+  transform: scale(1.1);
+}
+header nav .nav__list .list__li {
+  order: 2;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  position: relative;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+header nav .nav__list .list__li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+header nav .nav__list .list__li a:hover {
+  color: var(--color-acento, #4fc3f7);
+}
+header nav .nav__list .list__li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+header nav .nav__list .menu__responsive {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  header nav .nav__list {
+    gap: 0.5rem;
+  }
+  header nav .nav__list .list__li {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+  header nav .nav__list .btn__login {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  header nav .img__nav {
+    left: 1rem;
+  }
+  header nav .img__nav img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  header nav .img__nav span {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  header nav {
+    justify-content: space-between;
+  }
+  header nav .menu__responsive {
+    display: flex;
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+  }
+  header nav .menu__responsive.active {
+    display: none;
+  }
+  header nav .img__nav {
+    left: 1rem;
+    position: relative;
+    transform: none;
+  }
+  header nav .img__nav img {
+    width: 2rem;
+    height: 2rem;
+  }
+  header nav .img__nav span {
+    font-size: 0.95rem;
+  }
+  header nav .nav__list {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    gap: 2rem;
+  }
+  header nav .nav__list.active {
+    display: flex;
+  }
+  header nav .nav__list .menu__responsive-quitar {
+    display: none;
+    position: absolute;
+    right: 1.25rem;
+    top: 1.5rem;
+  }
+  header nav .nav__list .menu__responsive-quitar.active {
+    display: flex;
+  }
+  header nav .nav__list .list__li {
+    width: 100%;
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 1.25rem 0;
+    border-radius: 0;
+  }
+  header nav .nav__list .list__li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
+  }
+  header nav .nav__list .btn__login {
+    margin: 1.5rem 0 0 0;
+    width: 80vw;
+    max-width: 300px;
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 425px) {
+  header nav .menu__responsive {
+    right: 1rem;
+    font-size: 1.3rem;
+  }
+  header nav .img__nav {
+    left: 0.75rem;
+  }
+  header nav .img__nav img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  header nav .img__nav span {
+    font-size: 0.9rem;
+  }
+}
+
+/*# sourceMappingURL=_nav.css.map */

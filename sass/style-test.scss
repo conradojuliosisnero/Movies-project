@@ -1,0 +1,26 @@
+// Test básico sin imports
+:root {
+  --color-primario: #2476f9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+  overflow-x: hidden;
+}
+
+// Focus accesible
+button:focus,
+a:focus,
+input:focus {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}

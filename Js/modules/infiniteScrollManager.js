@@ -46,7 +46,7 @@ export class InfiniteScrollManager {
     try {
       await this.loadMoreCallback(this.currentPage);
     } catch (error) {
-      console.error('Error al cargar más películas:', error);
+      //.error('Error al cargar más películas:', error);
       this.currentPage--; // Revertir en caso de error
     } finally {
       this.isLoading = false;

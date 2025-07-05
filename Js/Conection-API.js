@@ -74,7 +74,7 @@ const loadMovies = async () => {
       idPelicula.forEach((pelicula) => {
         pelicula.addEventListener("click", async (event) => {
           const idPelicula = await event.currentTarget.getAttribute("data-id");
-          console.log("ID de la película: " + idPelicula);
+          //.log("ID de la película: " + idPelicula);
 
           // Ocultamos las demás películas y mostramos solo la seleccionada
           const peliculas = document.querySelectorAll(".contenedor .pelicula");
@@ -127,7 +127,7 @@ const loadMovies = async () => {
     }
   } catch (error) {
     // Capturamos cualquier error de red o ejecución
-    console.log(error);
+    //.log(error);
   }
 };
 

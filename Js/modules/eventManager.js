@@ -5,8 +5,9 @@
 import { CONFIG } from './config.js';
 
 export class EventManager {
-  constructor(domManager) {
+  constructor(domManager, router) {
     this.domManager = domManager;
+    this.router = router;
     this.setupEventListeners();
   }
 
@@ -16,38 +17,67 @@ export class EventManager {
   setupEventListeners() {
     // Delegación de eventos en el contenedor principal
     this.domManager.container.addEventListener('click', (event) => {
-      // Manejo de clics en enlaces de película
+      // Manejo de clics en enlaces de película (routing)
       if (event.target.matches(CONFIG.SELECTORS.movieLink)) {
         event.preventDefault();
-        this.handleMovieClick(event);
+        this.handleMovieLinkClick(event);
       }
 
-      // Manejo de clics en botón de regresar
+      // Manejo de clics en botón de regresar (legacy)
       if (event.target.closest(CONFIG.SELECTORS.backButton)) {
         this.handleBackClick(event);
+      }
+
+      // Manejo de clics en películas similares
+      if (event.target.closest('.similar-link')) {
+        event.preventDefault();
+        this.handleSimilarMovieClick(event);
       }
     });
 
     // Event listener para el filtro
     this.setupFilterListener();
+
+    // Event listener para navegación del browser
+    this.setupNavigationListener();
   }
 
   /**
-   * Maneja el clic en una película para mostrar detalles
+   * Maneja el clic en un enlace de película para navegar a detalles
    * @param {Event} event - Evento de clic
    */
-  handleMovieClick(event) {
+  handleMovieLinkClick(event) {
     const movieId = event.target.getAttribute('data-id');
-    console.log('ID de la película seleccionada:', movieId);
+    const movieUrl = `/movie/${movieId}`;
     
-    this.domManager.showMovieDetail(movieId);
+    //.log('Navegando a película:', movieId);
     
-    // Emite evento personalizado para que otros módulos puedan escuchar
-    this.emitCustomEvent('movieSelected', { movieId });
+    // Navegar usando el router
+    this.router.navigate(movieUrl);
+    
+    // Emite evento personalizado
+    this.emitCustomEvent('movieLinkClicked', { movieId, url: movieUrl });
   }
 
   /**
-   * Maneja el clic en el botón de regresar
+   * Maneja el clic en una película similar
+   * @param {Event} event - Evento de clic
+   */
+  handleSimilarMovieClick(event) {
+    const link = event.target.closest('.similar-link');
+    const href = link.getAttribute('href');
+    
+    //.log('Navegando a película similar:', href);
+    
+    // Navegar usando el router
+    this.router.navigate(href);
+    
+    // Scroll al top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /**
+   * Maneja el clic en el botón de regresar (legacy - para vista anterior)
    * @param {Event} event - Evento de clic
    */
   handleBackClick(event) {
@@ -64,16 +94,34 @@ export class EventManager {
   }
 
   /**
-   * Configura el listener para el filtro de películas
+   * Configura listeners para navegación del browser
    */
-  setupFilterListener() {
-    // Usamos delegación de eventos para el filtro
-    this.domManager.container.addEventListener('change', (event) => {
-      if (event.target.matches('#movieFilter')) {
-        const filterValue = event.target.value;
-        this.emitCustomEvent('filterChanged', { filterValue });
+  setupNavigationListener() {
+    // Interceptar clics en enlaces del header/nav si existen
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href]');
+      if (link && this.isInternalLink(link.href)) {
+        const href = link.getAttribute('href');
+        if (href.startsWith('/') || href.startsWith('#')) {
+          event.preventDefault();
+          this.router.navigate(href);
+        }
       }
     });
+  }
+
+  /**
+   * Verifica si un enlace es interno
+   * @param {string} href - URL del enlace
+   * @returns {boolean}
+   */
+  isInternalLink(href) {
+    try {
+      const url = new URL(href, window.location.origin);
+      return url.origin === window.location.origin;
+    } catch {
+      return true; // Enlaces relativos
+    }
   }
 
   /**
