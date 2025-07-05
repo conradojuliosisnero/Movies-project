@@ -7,13 +7,13 @@ import { MovieTemplate } from './movieTemplate.js';
 
 export class DOMManager {
   constructor() {
-    //.log('DOMManager: Constructor iniciado');
+    console.log('DOMManager: Constructor iniciado');
     this.container = document.querySelector(CONFIG.SELECTORS.container);
-    //.log('DOMManager: Selector usado:', CONFIG.SELECTORS.container);
-    //.log('DOMManager: Contenedor encontrado:', this.container);
+    console.log('DOMManager: Selector usado:', CONFIG.SELECTORS.container);
+    console.log('DOMManager: Contenedor encontrado:', this.container);
     
     if (!this.container) {
-      //.error('DOMManager: No se pudo encontrar el contenedor!');
+      console.error('DOMManager: No se pudo encontrar el contenedor!');
     }
     
     this.moviesHTML = '';
@@ -25,17 +25,17 @@ export class DOMManager {
    * @param {boolean} append - Si es true, añade al final; si es false, reemplaza
    */
   renderMovies(movies, append = true) {
-    //.log('DOMManager: renderMovies llamado');
-    //.log('DOMManager: Películas recibidas:', movies?.length);
-    //.log('DOMManager: Append:', append);
+    console.log('DOMManager: renderMovies llamado');
+    console.log('DOMManager: Películas recibidas:', movies?.length);
+    console.log('DOMManager: Append:', append);
     
     if (!this.container) {
-      //.error('DOMManager: No hay contenedor para renderizar!');
+      console.error('DOMManager: No hay contenedor para renderizar!');
       return;
     }
     
     const moviesHTML = MovieTemplate.generateMoviesGrid(movies);
-    //.log('DOMManager: HTML generado, longitud:', moviesHTML.length);
+    console.log('DOMManager: HTML generado, longitud:', moviesHTML.length);
     
     if (append) {
       this.moviesHTML += moviesHTML;
@@ -43,9 +43,9 @@ export class DOMManager {
       this.moviesHTML = moviesHTML;
     }
     
-    //.log('DOMManager: Insertando HTML en contenedor...');
+    console.log('DOMManager: Insertando HTML en contenedor...');
     this.container.innerHTML = this.moviesHTML;
-    //.log('DOMManager: HTML insertado exitosamente');
+    console.log('DOMManager: HTML insertado exitosamente');
   }
 
   /**
@@ -70,7 +70,7 @@ export class DOMManager {
    * @returns {NodeList} - Lista de elementos de película
    */
   getAllMovieElements() {
-    return document.querySelectorAll(CONFIG.SELECTORS.movieCard);
+    return this.container.querySelectorAll(CONFIG.SELECTORS.movieCard);
   }
 
   /**
@@ -132,60 +132,90 @@ export class DOMManager {
    * @param {Object} movieDetails - Datos completos de la película
    */
   showMovieDetailModal(movieDetails) {
-    const modalHTML = MovieTemplate.generateMovieDetailModal(movieDetails);
-    
-    // Remover modal existente si existe
-    this.removeMovieDetailModal();
+    // Crear modal overlay
+    const modalHTML = `
+      <div class="modal-overlay" id="movieModal">
+        <div class="modal-content">
+          <button class="modal-close" onclick="this.parentElement.parentElement.remove()">
+            <i class="fas fa-times"></i>
+          </button>
+          ${MovieTemplate.generateMovieDetailPage(movieDetails)}
+        </div>
+      </div>
+    `;
     
     // Añadir modal al body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     
-    // Añadir clase para bloquear scroll del body
-    document.body.classList.add(CONFIG.CSS_CLASSES.modalOpen);
-    
-    // Animación de entrada
-    requestAnimationFrame(() => {
-      const modal = document.getElementById('movieDetailModal');
-      if (modal) {
-        modal.classList.add(CONFIG.CSS_CLASSES.detailVisible);
-      }
+    // Prevenir scroll del body
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Verifica si un elemento está visible en el viewport
+   * @param {Element} element - Elemento a verificar
+   * @returns {boolean} - True si está visible
+   */
+  isElementInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  /**
+   * Obtiene elementos de película que están en el viewport
+   * @returns {Element[]} - Array de elementos visibles
+   */
+  getMoviesInViewport() {
+    const movies = this.getAllMovieElements();
+    return Array.from(movies).filter(movie => this.isElementInViewport(movie));
+  }
+
+  /**
+   * Añade clase de animación a elementos
+   * @param {string} className - Clase de animación
+   * @param {number} delay - Retraso entre elementos (ms)
+   */
+  animateMovies(className = 'fade-in', delay = 100) {
+    const movies = this.getAllMovieElements();
+    movies.forEach((movie, index) => {
+      setTimeout(() => {
+        movie.classList.add(className);
+      }, index * delay);
     });
   }
 
   /**
-   * Oculta el modal de detalles de película
+   * Scroll suave al top de la página
    */
-  hideMovieDetailModal() {
-    const modal = document.getElementById('movieDetailModal');
-    
-    if (modal) {
-      modal.classList.remove(CONFIG.CSS_CLASSES.detailVisible);
-      
-      // Esperar a que termine la animación antes de remover
-      setTimeout(() => {
-        this.removeMovieDetailModal();
-      }, 300);
-    }
-    
-    // Restaurar scroll del body
-    document.body.classList.remove(CONFIG.CSS_CLASSES.modalOpen);
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   /**
-   * Remueve el modal del DOM
+   * Muestra notificación toast
+   * @param {string} message - Mensaje a mostrar
+   * @param {string} type - Tipo de notificación (success, error, info)
    */
-  removeMovieDetailModal() {
-    const existingModal = document.getElementById('movieDetailModal');
-    if (existingModal) {
-      existingModal.remove();
-    }
-  }
-
-  /**
-   * Verifica si el modal está abierto
-   * @returns {boolean}
-   */
-  isModalOpen() {
-    return document.getElementById('movieDetailModal') !== null;
+  showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // Mostrar y ocultar después de 3 segundos
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
   }
 }

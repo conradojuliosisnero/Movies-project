@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Películas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 5px 0; }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Diagnóstico de la Aplicación de Películas</h1>
+    <div id="logs"></div>
+    <hr>
+    <div id="contenedor">
+        <!-- Aquí se cargarán las películas -->
+    </div>
+    
+    <script type="module">
+        const logsDiv = document.getElementById('logs');
+        
+        function log(message, type = 'info') {
+            const logEl = document.createElement('div');
+            logEl.className = `log ${type}`;
+            logEl.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            logsDiv.appendChild(logEl);
+            console.log(message);
+        }
+        
+        // Importar módulos de manera segura
+        async function testModules() {
+            try {
+                log('Iniciando test de módulos...', 'info');
+                
+                // Test 1: Verificar contenedor
+                const container = document.querySelector('#contenedor');
+                if (container) {
+                    log('✓ Contenedor encontrado', 'success');
+                } else {
+                    log('✗ Contenedor NO encontrado', 'error');
+                    return;
+                }
+                
+                // Test 2: Importar CONFIG
+                const { CONFIG } = await import('./Js/modules/config.js');
+                log('✓ CONFIG importado exitosamente', 'success');
+                log(`API Key presente: ${CONFIG.API.KEY ? '✓' : '✗'}`, CONFIG.API.KEY ? 'success' : 'error');
+                
+                // Test 3: Importar APIService
+                const { APIService } = await import('./Js/modules/apiService.js');
+                log('✓ APIService importado exitosamente', 'success');
+                
+                // Test 4: Hacer petición real
+                log('Haciendo petición a la API...', 'info');
+                const data = await APIService.getPopularMovies(1);
+                log(`✓ API responde con ${data.results.length} películas`, 'success');
+                
+                // Test 5: Importar MovieTemplate
+                const { MovieTemplate } = await import('./Js/modules/movieTemplate.js');
+                log('✓ MovieTemplate importado exitosamente', 'success');
+                
+                // Test 6: Generar HTML
+                const html = MovieTemplate.generateMoviesGrid(data.results.slice(0, 3));
+                log(`✓ HTML generado (${html.length} caracteres)`, 'success');
+                
+                // Test 7: Renderizar en contenedor
+                container.innerHTML = html;
+                log('✓ HTML renderizado en contenedor', 'success');
+                
+                log('¡Todas las pruebas pasaron exitosamente!', 'success');
+                
+            } catch (error) {
+                log(`✗ Error en test: ${error.message}`, 'error');
+                console.error('Error completo:', error);
+            }
+        }
+        
+        // Ejecutar test
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM cargado, iniciando diagnóstico...', 'info');
+            testModules();
+        });
+    </script>
+</body>
+</html>
