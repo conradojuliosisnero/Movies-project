@@ -2,21 +2,18 @@
 // Gestor de DOM y Renderizado
 // ===============================
 
-import { CONFIG } from './config.js';
-import { MovieTemplate } from './movieTemplate.js';
+import { CONFIG } from "./config.js";
+import { MovieTemplate } from "./movieTemplate.js";
 
 export class DOMManager {
   constructor() {
-    console.log('DOMManager: Constructor iniciado');
     this.container = document.querySelector(CONFIG.SELECTORS.container);
-    console.log('DOMManager: Selector usado:', CONFIG.SELECTORS.container);
-    console.log('DOMManager: Contenedor encontrado:', this.container);
-    
+
     if (!this.container) {
-      console.error('DOMManager: No se pudo encontrar el contenedor!');
+      console.error("DOMManager: No se pudo encontrar el contenedor!");
     }
-    
-    this.moviesHTML = '';
+
+    this.moviesHTML = "";
   }
 
   /**
@@ -25,27 +22,20 @@ export class DOMManager {
    * @param {boolean} append - Si es true, añade al final; si es false, reemplaza
    */
   renderMovies(movies, append = true) {
-    console.log('DOMManager: renderMovies llamado');
-    console.log('DOMManager: Películas recibidas:', movies?.length);
-    console.log('DOMManager: Append:', append);
-    
     if (!this.container) {
-      console.error('DOMManager: No hay contenedor para renderizar!');
+      console.error("DOMManager: No hay contenedor para renderizar!");
       return;
     }
-    
+
     const moviesHTML = MovieTemplate.generateMoviesGrid(movies);
-    console.log('DOMManager: HTML generado, longitud:', moviesHTML.length);
-    
+
     if (append) {
       this.moviesHTML += moviesHTML;
     } else {
       this.moviesHTML = moviesHTML;
     }
-    
-    console.log('DOMManager: Insertando HTML en contenedor...');
+
     this.container.innerHTML = this.moviesHTML;
-    console.log('DOMManager: HTML insertado exitosamente');
   }
 
   /**
@@ -91,7 +81,7 @@ export class DOMManager {
     const container = this.container;
 
     movies.forEach((movie) => {
-      if (movie.getAttribute('data-id') !== movieId) {
+      if (movie.getAttribute("data-id") !== movieId) {
         movie.classList.add(CONFIG.CSS_CLASSES.hidden);
       } else {
         movie.classList.add(CONFIG.CSS_CLASSES.movieView);
@@ -111,7 +101,7 @@ export class DOMManager {
 
     movies.forEach((movie) => {
       movie.classList.remove(CONFIG.CSS_CLASSES.hidden);
-      if (movie.getAttribute('data-id') === movieId) {
+      if (movie.getAttribute("data-id") === movieId) {
         movie.classList.remove(CONFIG.CSS_CLASSES.movieView);
       }
     });
@@ -123,8 +113,8 @@ export class DOMManager {
    * Limpia el contenedor
    */
   clearContainer() {
-    this.container.innerHTML = '';
-    this.moviesHTML = '';
+    this.container.innerHTML = "";
+    this.moviesHTML = "";
   }
 
   /**
@@ -143,12 +133,12 @@ export class DOMManager {
         </div>
       </div>
     `;
-    
+
     // Añadir modal al body
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
     // Prevenir scroll del body
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   }
 
   /**
@@ -161,7 +151,8 @@ export class DOMManager {
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
@@ -172,7 +163,9 @@ export class DOMManager {
    */
   getMoviesInViewport() {
     const movies = this.getAllMovieElements();
-    return Array.from(movies).filter(movie => this.isElementInViewport(movie));
+    return Array.from(movies).filter((movie) =>
+      this.isElementInViewport(movie)
+    );
   }
 
   /**
@@ -180,7 +173,7 @@ export class DOMManager {
    * @param {string} className - Clase de animación
    * @param {number} delay - Retraso entre elementos (ms)
    */
-  animateMovies(className = 'fade-in', delay = 100) {
+  animateMovies(className = "fade-in", delay = 100) {
     const movies = this.getAllMovieElements();
     movies.forEach((movie, index) => {
       setTimeout(() => {
@@ -195,7 +188,7 @@ export class DOMManager {
   scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }
 
@@ -204,17 +197,17 @@ export class DOMManager {
    * @param {string} message - Mensaje a mostrar
    * @param {string} type - Tipo de notificación (success, error, info)
    */
-  showToast(message, type = 'info') {
-    const toast = document.createElement('div');
+  showToast(message, type = "info") {
+    const toast = document.createElement("div");
     toast.className = `toast toast-${type}`;
     toast.textContent = message;
-    
+
     document.body.appendChild(toast);
-    
+
     // Mostrar y ocultar después de 3 segundos
-    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => toast.classList.add("show"), 100);
     setTimeout(() => {
-      toast.classList.remove('show');
+      toast.classList.remove("show");
       setTimeout(() => toast.remove(), 300);
     }, 3000);
   }

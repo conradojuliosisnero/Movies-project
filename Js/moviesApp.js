@@ -25,8 +25,6 @@ class MoviesApp {
 
   async init() {
     try {
-      console.log("🎬 Iniciando aplicación de películas...");
-
       // Configurar el contenedor
       this.setupContainer();
 
@@ -37,7 +35,6 @@ class MoviesApp {
       const currentPath = window.location.pathname;
       if (currentPath.includes("/movie/")) {
         // Si es una URL de película, el router se encargará
-        console.log("🎯 Detectada URL de película:", currentPath);
       } else {
         // Solo cargar películas si estamos en home
         await this.loadInitialMovies();
@@ -46,8 +43,6 @@ class MoviesApp {
         this.setupEvents();
         this.setupInfiniteScroll();
       }
-
-      console.log("✅ Aplicación iniciada correctamente");
     } catch (error) {
       console.error("❌ Error al inicializar la aplicación:", error);
       this.showError("Error al cargar la aplicación");
@@ -69,14 +64,11 @@ class MoviesApp {
   async loadInitialMovies() {
     try {
       this.showLoading();
-      console.log("📡 Cargando películas populares...");
 
       const data = await APIService.getPopularMovies(1);
       this.currentMovies = data.results;
       this.totalPages = data.total_pages;
       this.currentPage = 1;
-
-      console.log(`✅ ${this.currentMovies.length} películas cargadas`);
 
       this.renderMovies(this.currentMovies, true);
       this.hideLoading();
@@ -96,15 +88,11 @@ class MoviesApp {
       this.isLoading = true;
       this.currentPage++;
 
-      console.log(`📡 Cargando página ${this.currentPage}...`);
-
       const data = await APIService.getPopularMovies(this.currentPage);
       const newMovies = data.results;
 
       this.currentMovies = [...this.currentMovies, ...newMovies];
       this.renderMovies(newMovies, false);
-
-      console.log(`✅ ${newMovies.length} películas adicionales cargadas`);
     } catch (error) {
       console.error("❌ Error al cargar más películas:", error);
       this.currentPage--; // Revertir el incremento
@@ -135,12 +123,10 @@ class MoviesApp {
   setupRouter() {
     // Configurar rutas
     this.router.addRoute("/", () => {
-      console.log("🏠 Navegando a home");
       this.showHome();
     });
 
     this.router.addRoute("/movie/:id", (params) => {
-      console.log("🎬 Navegando a película:", params.id);
       this.showMovieDetails(params.id);
     });
 
@@ -172,14 +158,10 @@ class MoviesApp {
 
   async showMovieDetails(movieId) {
     try {
-      console.log(`🔍 Cargando detalles de película ID: ${movieId}`);
       this.showLoading();
 
       const movieDetails = await APIService.getMovieDetails(movieId);
-      console.log("🎬 Detalles obtenidos:", movieDetails);
-
       const detailsHTML = MovieTemplate.generateMovieDetailPage(movieDetails);
-      console.log("🎨 HTML generado para detalles");
 
       const container = document.querySelector(CONFIG.SELECTORS.container);
       container.innerHTML = detailsHTML;
@@ -187,8 +169,6 @@ class MoviesApp {
 
       this.hideLoading();
       this.setupDetailEvents();
-
-      console.log("✅ Detalles de película mostrados");
     } catch (error) {
       console.error("Error al cargar detalles:", error);
       this.showError("Error al cargar los detalles de la película");
@@ -212,10 +192,8 @@ class MoviesApp {
     // Configurar eventos básicos para las películas
     this.setupMovieEvents();
   }
-
   setupMovieEvents() {
     const movieCards = document.querySelectorAll(CONFIG.SELECTORS.movieCard);
-    console.log(`🎯 Configurando eventos para ${movieCards.length} películas`);
 
     movieCards.forEach((card) => {
       // Evento click en la tarjeta completa
@@ -224,7 +202,6 @@ class MoviesApp {
         e.stopPropagation();
 
         const movieId = card.dataset.id;
-        console.log("🎬 Click en película, ID:", movieId);
 
         if (movieId) {
           this.router.navigate(`/movie/${movieId}`);
@@ -239,7 +216,6 @@ class MoviesApp {
           e.stopPropagation();
 
           const movieId = detailLink.dataset.id;
-          console.log("🔗 Click en enlace detalles, ID:", movieId);
 
           if (movieId) {
             this.router.navigate(`/movie/${movieId}`);
@@ -288,7 +264,6 @@ class MoviesApp {
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 DOM cargado, iniciando aplicación...");
   new MoviesApp();
 });
 

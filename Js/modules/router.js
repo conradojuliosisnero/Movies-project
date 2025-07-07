@@ -50,8 +50,6 @@ export class Router {
    * @param {boolean} replace - Si reemplaza la entrada del historial
    */
   navigate(path, replace = false) {
-    console.log("Router: Navigating to:", path);
-
     // Para archivos locales, usar hash
     if (window.location.protocol === "file:") {
       if (path.startsWith("/movie/")) {
@@ -76,18 +74,13 @@ export class Router {
    */
   handleRoute() {
     const path = window.location.pathname;
-    console.log("Router: Handling path:", path);
-    console.log("Router: Protocol:", window.location.protocol);
 
     // Para archivos locales (file://), revisar hash o parámetros
     if (window.location.protocol === "file:") {
-      console.log("Router: File protocol detected");
-
       // Revisar si hay hash para película
       const hash = window.location.hash;
       if (hash && hash.includes("#movie/")) {
         const movieId = hash.replace("#movie/", "");
-        console.log("Router: Found movie ID in hash:", movieId);
         const movieRoute = this.routes.get("/movie/:id");
         if (movieRoute) {
           this.currentRoute = `/movie/${movieId}`;
@@ -97,7 +90,6 @@ export class Router {
       }
 
       // Por defecto cargar home
-      console.log("Router: Loading home for file protocol");
       const homeRoute = this.routes.get("/");
       if (homeRoute) {
         this.currentRoute = "/";
