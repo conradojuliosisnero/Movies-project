@@ -2,16 +2,15 @@
 // Gestor de Scroll Infinito
 // ===============================
 
-import { CONFIG } from './config.js';
+import { CONFIG } from "./config.js";
 
 export class InfiniteScrollManager {
   constructor(loadMoreCallback) {
     this.loadMoreCallback = loadMoreCallback;
-    this.currentPage = 1;
     this.maxPages = CONFIG.API.MAX_PAGES;
     this.isLoading = false;
     this.lastObservedElement = null;
-    
+
     this.initObserver();
   }
 
@@ -22,12 +21,13 @@ export class InfiniteScrollManager {
     const options = {
       root: null,
       rootMargin: CONFIG.OBSERVER.rootMargin,
-      threshold: CONFIG.OBSERVER.threshold
+      threshold: CONFIG.OBSERVER.threshold,
     };
 
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.isLoading && this.canLoadMore()) {
+        if (entry.isIntersecting && !this.isLoading) {
+          console.log("👁️ Elemento intersectando, cargando más contenido...");
           this.loadNext();
         }
       });
@@ -38,16 +38,12 @@ export class InfiniteScrollManager {
    * Carga la siguiente página
    */
   async loadNext() {
-    if (!this.canLoadMore()) return;
-
     this.isLoading = true;
-    this.currentPage++;
-    
+
     try {
-      await this.loadMoreCallback(this.currentPage);
+      await this.loadMoreCallback();
     } catch (error) {
-      //.error('Error al cargar más películas:', error);
-      this.currentPage--; // Revertir en caso de error
+      console.error("Error al cargar más películas:", error);
     } finally {
       this.isLoading = false;
     }
@@ -61,28 +57,28 @@ export class InfiniteScrollManager {
     if (this.lastObservedElement) {
       this.observer.unobserve(this.lastObservedElement);
     }
-    
-    if (element && this.canLoadMore()) {
+
+    if (element) {
+      console.log("🎯 Observando nuevo elemento:", element);
       this.lastObservedElement = element;
       this.observer.observe(element);
     }
   }
 
   /**
-   * Verifica si se pueden cargar más páginas
+   * Obtiene el estado de carga
    * @returns {boolean}
    */
-  canLoadMore() {
-    return this.currentPage < this.maxPages;
+  getLoadingState() {
+    return this.isLoading;
   }
 
   /**
    * Reinicia el estado del scroll infinito
    */
   reset() {
-    this.currentPage = 1;
     this.isLoading = false;
-    
+
     if (this.lastObservedElement) {
       this.observer.unobserve(this.lastObservedElement);
       this.lastObservedElement = null;
@@ -96,21 +92,5 @@ export class InfiniteScrollManager {
     if (this.observer) {
       this.observer.disconnect();
     }
-  }
-
-  /**
-   * Obtiene la página actual
-   * @returns {number}
-   */
-  getCurrentPage() {
-    return this.currentPage;
-  }
-
-  /**
-   * Obtiene el estado de carga
-   * @returns {boolean}
-   */
-  getLoadingState() {
-    return this.isLoading;
   }
 }

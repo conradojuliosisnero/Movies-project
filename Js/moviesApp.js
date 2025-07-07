@@ -118,6 +118,24 @@ class MoviesApp {
 
     // Configurar eventos en las nuevas películas
     this.setupMovieEvents();
+
+    // Actualizar el elemento observado para infinite scroll
+    this.updateInfiniteScrollTarget();
+  }
+
+  updateInfiniteScrollTarget() {
+    // Obtener la última película renderizada
+    const movieCards = document.querySelectorAll(CONFIG.SELECTORS.movieCard);
+    console.log(`🎯 Total de películas: ${movieCards.length}`);
+
+    if (movieCards.length > 0 && this.infiniteScrollManager) {
+      const lastMovieCard = movieCards[movieCards.length - 1];
+      console.log(
+        "🔍 Configurando observación en última película:",
+        lastMovieCard
+      );
+      this.infiniteScrollManager.updateObservedElement(lastMovieCard);
+    }
   }
 
   setupRouter() {
@@ -227,7 +245,9 @@ class MoviesApp {
 
   setupInfiniteScroll() {
     // Inicializar el scroll infinito
+    console.log("🚀 Configurando infinite scroll...");
     this.infiniteScrollManager = new InfiniteScrollManager(() => {
+      console.log("📞 Callback de infinite scroll ejecutado");
       this.loadMoreMovies();
     });
   }
