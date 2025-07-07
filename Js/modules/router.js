@@ -2,7 +2,7 @@
 // Router para manejo de rutas dinámicas
 // ===============================
 
-import { CONFIG } from './config.js';
+import { CONFIG } from "./config.js";
 
 export class Router {
   constructor() {
@@ -16,7 +16,12 @@ export class Router {
    */
   init() {
     // Escuchar cambios en la URL
-    window.addEventListener('popstate', () => {
+    window.addEventListener("popstate", () => {
+      this.handleRoute();
+    });
+
+    // Escuchar cambios en el hash (para archivos locales)
+    window.addEventListener("hashchange", () => {
       this.handleRoute();
     });
 
@@ -45,11 +50,24 @@ export class Router {
    * @param {boolean} replace - Si reemplaza la entrada del historial
    */
   navigate(path, replace = false) {
-    if (replace) {
-      history.replaceState({}, '', path);
+    console.log("Router: Navigating to:", path);
+
+    // Para archivos locales, usar hash
+    if (window.location.protocol === "file:") {
+      if (path.startsWith("/movie/")) {
+        window.location.hash = `#${path.substring(1)}`;
+      } else {
+        window.location.hash = "";
+      }
     } else {
-      history.pushState({}, '', path);
+      // Para servidores HTTP, usar historial normal
+      if (replace) {
+        history.replaceState({}, "", path);
+      } else {
+        history.pushState({}, "", path);
+      }
     }
+
     this.handleRoute();
   }
 
@@ -58,37 +76,53 @@ export class Router {
    */
   handleRoute() {
     const path = window.location.pathname;
-    //.log('Router: Handling path:', path);
-    //.log('Router: Protocol:', window.location.protocol);
-    
-    // Para archivos locales (file://), siempre cargar home
-    if (window.location.protocol === 'file:') {
-      //.log('Router: File protocol detected, loading home');
-      const homeRoute = this.routes.get('/');
+    console.log("Router: Handling path:", path);
+    console.log("Router: Protocol:", window.location.protocol);
+
+    // Para archivos locales (file://), revisar hash o parámetros
+    if (window.location.protocol === "file:") {
+      console.log("Router: File protocol detected");
+
+      // Revisar si hay hash para película
+      const hash = window.location.hash;
+      if (hash && hash.includes("#movie/")) {
+        const movieId = hash.replace("#movie/", "");
+        console.log("Router: Found movie ID in hash:", movieId);
+        const movieRoute = this.routes.get("/movie/:id");
+        if (movieRoute) {
+          this.currentRoute = `/movie/${movieId}`;
+          movieRoute({ id: movieId });
+          return;
+        }
+      }
+
+      // Por defecto cargar home
+      console.log("Router: Loading home for file protocol");
+      const homeRoute = this.routes.get("/");
       if (homeRoute) {
-        this.currentRoute = '/';
+        this.currentRoute = "/";
         homeRoute();
       }
       return;
     }
-    
+
     // Para servidores HTTP normales
     let normalizedPath = path;
-    if (path.includes('.html')) {
-      normalizedPath = '/';
+    if (path.includes(".html")) {
+      normalizedPath = "/";
     }
-    
+
     const route = this.matchRoute(normalizedPath);
     //.log('Router: Matched route:', route);
-    
+
     if (route) {
       this.currentRoute = route.path;
       route.handler(route.params);
     } else {
       //.log('Router: No route found, redirecting to home');
       // Ruta no encontrada, ir al home
-      if (normalizedPath !== '/') {
-        this.navigate('/', true);
+      if (normalizedPath !== "/") {
+        this.navigate("/", true);
       }
     }
   }
@@ -105,7 +139,7 @@ export class Router {
         return {
           path: routePath,
           handler,
-          params: match
+          params: match,
         };
       }
     }
@@ -120,14 +154,14 @@ export class Router {
    */
   matchPath(routePath, actualPath) {
     // Convertir patrón de ruta a regex
-    const routeRegex = routePath.replace(/:([^/]+)/g, '([^/]+)');
+    const routeRegex = routePath.replace(/:([^/]+)/g, "([^/]+)");
     const regex = new RegExp(`^${routeRegex}$`);
-    
+
     const match = actualPath.match(regex);
     if (!match) return null;
 
     // Extraer nombres de parámetros
-    const paramNames = [...routePath.matchAll(/:([^/]+)/g)].map(m => m[1]);
+    const paramNames = [...routePath.matchAll(/:([^/]+)/g)].map((m) => m[1]);
     const params = {};
 
     paramNames.forEach((name, index) => {
